@@ -33,10 +33,28 @@ Understand why we use launch files, how to write launch scripts in Python, isola
             )
         ])
     ```
-* **Isolating Environments: Namespaces**
-  * Launching identical nodes without conflicts by scoping their topics:
-    * Node A runs in namespace `/robot_1` (publishes to `/robot_1/sensor_data`).
-    * Node B runs in namespace `/robot_2` (publishes to `/robot_2/sensor_data`).
+* **What are Namespaces? (Isolating Environments)**
+  * **Definition**: A namespace is a prefix added to the names of nodes, topics, services, and actions (e.g., prefixing `/camera/image_raw` with `/robot_1` to make it `/robot_1/camera/image_raw`).
+  * **Why use namespaces?**:
+    * **Avoid Name Collisions**: If you have two identical robot arms on one machine, running their driver nodes normally will cause them to publish to the exact same topics (e.g., `/joint_states`), corrupting the data.
+    * **Clean Scaling**: By assigning a unique namespace to each arm (e.g., `/left_arm` and `/right_arm`), you can run the identical node executable multiple times.
+  * **How Namespaces Affect ROS 2 Components**:
+    * Node `/talker` in namespace `/robot_1` becomes `/robot_1/talker`.
+    * Topic `/chatter` published by that node becomes `/robot_1/chatter`.
+  * **Applying Namespaces**:
+    1. **In Launch Files (Python)**:
+       ```python
+       Node(
+           package='my_package',
+           executable='talker_node',
+           namespace='robot_1' # Prepends '/robot_1' to node and its topics
+       )
+       ```
+    2. **Via CLI (`ros2 run`)**:
+       Use the `--ros-args -r __ns:=` parameter flag:
+       ```bash
+       ros2 run my_package talker_node --ros-args -r __ns:=/robot_1
+       ```
 * **Dynamic Topic Routing: Remapping**
   * Change a node's topic name without rewriting its source code:
     ```python
