@@ -1,0 +1,20 @@
+name: Sync Notion to GitHub
+on:
+  schedule:
+    - cron: '*/15 * * * *' # Pull changes from Notion every 15 minutes
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Sync Notion Pages to Repo
+        uses: YouXam/Notion-GitHub-Sync@v2
+        with:
+          notion_token: ${{ secrets.NOTION_TOKEN }}
