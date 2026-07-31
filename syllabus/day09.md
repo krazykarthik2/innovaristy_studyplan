@@ -55,15 +55,26 @@ Understand why we use launch files, how to write launch scripts in Python, isola
        ```bash
        ros2 run my_package talker_node --ros-args -r __ns:=/robot_1
        ```
-* **Dynamic Topic Routing: Remapping**
-  * Change a node's topic name without rewriting its source code:
-    ```python
-    Node(
-        package='telemetry',
-        executable='publisher_node',
-        remappings=[('/old_chatter', '/new_telemetry_stream')]
-    )
-    ```
+* **Dynamic Topic Routing & Aliasing: Remapping**
+  * **Is Remapping same as Aliasing?**: Yes! In ROS 2, "Remapping" is the official term for creating a name alias. It redirects a node's default topic, service, or action names to a new alias name without editing the source code.
+  * **How to implement Aliasing/Remapping**:
+    1. **In Launch Files (Python)**:
+       Pass the `remappings` list to the `Node` action:
+       ```python
+       Node(
+           package='telemetry',
+           executable='publisher_node',
+           remappings=[('/old_chatter', '/new_telemetry_stream')] # Aliases '/old_chatter' to '/new_telemetry_stream'
+       )
+       ```
+    2. **Via CLI (`ros2 run`)**:
+       Use the `-r` flag followed by the mapping target:
+       ```bash
+       ros2 run telemetry publisher_node --ros-args -r /old_chatter:=/new_telemetry_stream
+       ```
+  * **Remapping Rules**:
+    * Global Remap (starts with `/`): Changes the name globally across all namespaces.
+    * Relative Remap (no leading `/`): Changes the name only within the node's specific namespace context.
 * **Loading Parameter files (YAML) in Launch**
   * Pass parameter configurations directly to nodes at launch:
     ```python
