@@ -64,6 +64,10 @@ Understand package architecture, dependencies, build settings (`setup.py` and `C
         ],
     },
     ```
+  * **What is the use of `entry_points`?**
+    * **Command Mapping**: It maps a console terminal command (on the left, e.g., `my_publisher`) to the actual Python script and execution function (on the right, e.g., the `main()` function in `publisher_script.py` inside the `my_package` folder).
+    * **Enables `ros2 run`**: Without this mapping, ROS2 has no way of knowing which Python file or function to trigger when you run `ros2 run my_package my_publisher`.
+    * **Build Integration**: During `colcon build`, ROS2 creates a wrapper script in the background. Once you source your workspace overlay, you can run this script directly as a CLI command from any terminal.
 
 ---
 
