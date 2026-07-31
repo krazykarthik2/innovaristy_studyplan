@@ -23,6 +23,8 @@ Understand nodes (the modular building blocks), topics (the data pipelines), mes
     * `ros2 topic echo /my_topic`: Prints the messages published on `/my_topic` in real-time.
     * `ros2 topic info /my_topic`: Shows active publishers and subscribers count.
     * `ros2 topic hz /my_topic`: Measure data publishing frequency.
+  * **Visualizing Node Graphs (`rqt_graph`)**
+    * `rqt_graph`: A GUI tool that draws the active system graph. Essential for debugging node connections.
 * **ROS2 Messages (.msg)**
   * Strict data structures defining what type of data can be sent on a topic.
   * Built-in interfaces: `std_msgs/msg/String`, `sensor_msgs/msg/LaserScan`, `geometry_msgs/msg/Pose`.
@@ -68,6 +70,7 @@ Understand nodes (the modular building blocks), topics (the data pipelines), mes
 * Use CLI tools:
   * Check node relationships: `ros2 node list`
   * Echo the telemetry stream: `ros2 topic echo /chatter`
+  * Open the graphical connection map: `rqt_graph`
 
 ---
 
