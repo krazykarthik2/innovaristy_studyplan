@@ -34,6 +34,22 @@ Understand package architecture, dependencies, build settings (`setup.py` and `C
   * Ensure dependencies are correctly declared in your `package.xml` so the package manager knows what to install:
     * `<depend>rclpy</depend>`
     * `<depend>std_msgs</depend>`
+  * **Adding Dependencies After Package Creation**:
+    * If you forget to add a dependency during `ros2 pkg create`, you can add it manually later:
+      1. **Update `package.xml`**: Add a new tag under the dependencies section:
+         ```xml
+         <depend>new_package</depend>
+         ```
+      2. **For Python packages**: No extra build config changes are needed. Just import the dependency in your scripts.
+      3. **For C++ packages**: You must also update `CMakeLists.txt`:
+         * Declare it using `find_package`:
+           ```cmake
+           find_package(new_package REQUIRED)
+           ```
+         * Link it to your executable target:
+           ```cmake
+           ament_target_dependencies(your_node_target new_package)
+           ```
   * Run dependency resolver command to automatically verify and install missing libs:
     ```bash
     rosdep install --from-paths src --ignore-src -y -r
