@@ -15,17 +15,75 @@ Understand request-reply interactions (Services), configure global parameters fo
     * `ros2 service list`: Active service channels.
     * `ros2 service type /reset`: Show interface format.
     * `ros2 service call /reset std_srvs/srv/Empty`: Trigger call directly from the terminal.
-* **Writing custom Service Definitions**
-  * Created inside an interface package's `srv/` directory:
+* **Writing Custom Service Definitions (.srv Files)**
+  * **The .srv File Format (Blueprint)**:
+    * Created inside your ROS2 package's `srv/` directory (e.g., `SetSpeed.srv`).
+    * The file format requires three dashes `---` to separate request fields from response fields:
+      ```protobuf
+      # --- REQUEST (Data sent by the client) ---
+      float64 speed
+      string direction
+      ---
+      # --- RESPONSE (Data sent back by the server) ---
+      bool success
+      string message
+      ```
+* **How to Write an Active Service (Python Code)**:
+  * Minimal, complete Python node using `rclpy` to host an active service `/set_robot_speed` using the interface `my_custom_package/srv/SetSpeed`:
+    ```python
+    import rclpy
+    from rclpy.node import Node
+
+    # 1. Import the service interface generated from your .srv file
+    from my_custom_package.srv import SetSpeed
+
+    class SpeedServiceNode(Node):
+        def __init__(self):
+            super().__init__('speed_service_node')
+            # 2. Create the active service server
+            # Format: create_service(SrvType, 'service_name', callback_function)
+            self.srv = self.create_service(
+                SetSpeed, 
+                '/set_robot_speed', 
+                self.handle_set_speed
+            )
+            self.get_logger().info('Active Service /set_robot_speed is running!')
+
+        # 3. Define the callback function (executes when someone calls the service)
+        def handle_set_speed(self, request, response):
+            # Access request fields
+            self.get_logger().info(f'Received: speed={request.speed}, direction={request.direction}')
+            
+            # Populate response fields
+            if request.speed >= 0.0:
+                response.success = True
+                response.message = f'Speed set to {request.speed} {request.direction}'
+            else:
+                response.success = False
+                response.message = 'Error: Speed cannot be negative!'
+            
+            # Return the completed response back to the client
+            return response
+
+    def main(args=None):
+        rclpy.init(args=args)
+        node = SpeedServiceNode()
+        rclpy.spin(node) # Keeps the node running to listen for calls
+        rclpy.shutdown()
+
+    if __name__ == '__main__':
+        main()
     ```
-    # SetState.srv
-    # Request
-    string desired_state
-    float64 timeout
-    ---
-    # Response
-    bool success
-    string message
+* **How to Trigger Your Active Service**:
+  * Run the Python node: `ros2 run my_custom_package speed_service`
+  * **Verify it is active**:
+    ```bash
+    ros2 service list
+    # Output will show: /set_robot_speed
+    ```
+  * **Call it directly from the terminal**:
+    ```bash
+    ros2 service call /set_robot_speed my_custom_package/srv/SetSpeed "{speed: 1.5, direction: 'forward'}"
     ```
 * **ROS2 Parameters (Node Configs)**
   * Configuration values stored inside nodes (e.g., maximum velocity limits, serial port names).
