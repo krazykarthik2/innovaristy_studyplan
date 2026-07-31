@@ -25,11 +25,16 @@ Understand nodes (the modular building blocks), topics (the data pipelines), mes
     * `ros2 topic hz /my_topic`: Measure data publishing frequency.
   * **Visualizing Node Graphs (`rqt_graph`)**
     * `rqt_graph`: A GUI tool that draws the active system graph. Essential for debugging node connections.
-* **ROS2 Messages (.msg)**
-  * Strict data structures defining what type of data can be sent on a topic.
+* **ROS2 Interfaces (.msg, .srv, .action)**
+  * **What is an Interface?**: A structured contract that defines the format of data sent between nodes.
+  * Three core types of interfaces:
+    1. **Messages (.msg)**: Unidirectional structures used by **Topics** (e.g., streaming IMU or battery telemetry).
+    2. **Services (.srv)**: Request/Response structures used by **Services** (e.g., triggering a camera capture).
+    3. **Actions (.action)**: Goal/Result/Feedback structures used by **Actions** (e.g., commanding a joint trajectory plan).
   * Built-in interfaces: `std_msgs/msg/String`, `sensor_msgs/msg/LaserScan`, `geometry_msgs/msg/Pose`.
-  * Inspect messages:
-    * `ros2 interface show geometry_msgs/msg/Point`: Displays `float64 x`, `float64 y`, `float64 z`.
+  * CLI inspection commands:
+    * `ros2 interface list`: Show all messages, services, and actions installed on your system.
+    * `ros2 interface show geometry_msgs/msg/Point`: View layout details (e.g., `float64 x`, `float64 y`, `float64 z`).
 * **Writing your first Publisher Node (Python)**
   * Uses `rclpy` (ROS2 Client Library for Python).
   * Structure of a node class:
