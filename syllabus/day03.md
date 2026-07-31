@@ -1,3 +1,7 @@
+---
+notion-url: https://www.notion.so/3aec4db880d981b8b32ecc7e95df383c
+---
+
 # Day 03: Python OOP & Concurrency for Robots
 
 ### 📌 TL;DR

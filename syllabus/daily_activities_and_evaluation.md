@@ -1,3 +1,7 @@
+---
+notion-url: https://www.notion.so/3aec4db880d9816b8fddea0588ae2f6a
+---
+
 # Parallel Learning Activities & Evaluation Rubric
 
 To make the most of this intensive 15-day training program, interns are expected to perform daily recurring self-study activities alongside completing core assignments. Student achievements are graded based on a rigorous evaluation matrix.

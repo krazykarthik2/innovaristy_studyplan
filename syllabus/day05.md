@@ -1,3 +1,7 @@
+---
+notion-url: https://www.notion.so/3aec4db880d9812d8200fa23c5aa2f23
+---
+
 # Day 05: ROS2 Nodes, Topics, Messages & Publishers
 
 ### 📌 TL;DR

@@ -1,3 +1,7 @@
+---
+notion-url: https://www.notion.so/3aec4db880d981f7bb79c5ddd88f896b
+---
+
 # Day 09: ROS2 Launch Systems & Multi-Node Coordination
 
 ### 📌 TL;DR

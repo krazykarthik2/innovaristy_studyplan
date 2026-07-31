@@ -1,3 +1,7 @@
+---
+notion-url: https://www.notion.so/3aec4db880d98129985ade9d0eb1a091
+---
+
 # Week 2: ROS2 Development (Days 6–10)
 
 Welcome to Week 2! This week shifts focus to modular package development, request-reply operations, configurations, and spatial transformations in ROS2.

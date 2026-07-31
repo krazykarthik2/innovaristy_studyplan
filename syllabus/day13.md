@@ -1,3 +1,7 @@
+---
+notion-url: https://www.notion.so/3aec4db880d98145b126d406c7220631
+---
+
 # Day 13: Dobot Magician ROS2 Integration & Serial Driver
 
 ### 📌 TL;DR

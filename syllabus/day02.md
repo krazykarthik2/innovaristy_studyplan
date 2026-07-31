@@ -1,3 +1,7 @@
+---
+notion-url: https://www.notion.so/3aec4db880d98158ba6dcfde55216d10
+---
+
 # Day 02: Linux for Robotics & Automation
 
 ### 📌 TL;DR

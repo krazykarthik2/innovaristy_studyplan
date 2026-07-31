@@ -1,3 +1,7 @@
+---
+notion-url: https://www.notion.so/3aec4db880d9817fb129d03db405e94c
+---
+
 # Week 3: Robot Integration (Days 11–15)
 
 Welcome to Week 3! This week bridges the gap between software development and physical robotics. You will construct URDF models, interface with 3D simulation engines, control physical manipulators, and design control stacks for 6-DoF surgical systems.

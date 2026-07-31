@@ -1,3 +1,7 @@
+---
+notion-url: https://www.notion.so/3aec4db880d98175abc1d5dba44e3c7a
+---
+
 # Day 01: Ubuntu & Linux Fundamentals
 
 ### 📌 TL;DR

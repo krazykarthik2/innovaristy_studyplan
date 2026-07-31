@@ -1,3 +1,7 @@
+---
+notion-url: https://www.notion.so/3aec4db880d9819ca3d0d6d06950cc58
+---
+
 # Day 12: RViz, Gazebo & MoveIt2 Motion Planning
 
 ### 📌 TL;DR

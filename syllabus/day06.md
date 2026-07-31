@@ -1,3 +1,7 @@
+---
+notion-url: https://www.notion.so/3aec4db880d98167a6bbda510c1196fe
+---
+
 # Day 06: ROS2 Package Design (CMake & Python)
 
 ### 📌 TL;DR

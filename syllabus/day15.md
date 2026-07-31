@@ -1,3 +1,7 @@
+---
+notion-url: https://www.notion.so/3aec4db880d98135b062e3115a4e3b2c
+---
+
 # Day 15: Final Research Project Implementation (Practical)
 
 ### 📌 TL;DR

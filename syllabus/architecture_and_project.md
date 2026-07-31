@@ -1,3 +1,7 @@
+---
+notion-url: https://www.notion.so/3aec4db880d981a4bc4be46e28b55ad1
+---
+
 # Expected Final Software Stack Architecture
 
 This document describes the layered software stack structure of the **6-DoF Taurean Surgical Robot** and how the concepts learned during the 15-day internship map to each layer.

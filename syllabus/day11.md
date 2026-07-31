@@ -1,3 +1,7 @@
+---
+notion-url: https://www.notion.so/3aec4db880d9813baa05c592fb53441a
+---
+
 # Day 11: URDF Robot Description & Kinematic Chains
 
 ### 📌 TL;DR

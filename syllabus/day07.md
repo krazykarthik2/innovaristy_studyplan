@@ -1,3 +1,7 @@
+---
+notion-url: https://www.notion.so/3aec4db880d9817eacb6c87162b16e36
+---
+
 # Day 07: ROS2 Services & Config Parameters
 
 ### 📌 TL;DR

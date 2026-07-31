@@ -1,3 +1,7 @@
+---
+notion-url: https://www.notion.so/3aec4db880d981bda81adc69038f04c3
+---
+
 # Day 14: 6-DoF Taurean Surgical Robot Stack (Practical)
 
 ### 📌 TL;DR

@@ -1,3 +1,7 @@
+---
+notion-url: https://www.notion.so/3aec4db880d9816fbfd8c44abca5368d
+---
+
 # Week 1: Ubuntu & ROS2 Foundations (Days 1–5)
 
 Welcome to Week 1! This week establishes the baseline OS, programming, and core robotics environment skills required for ROS2 development.

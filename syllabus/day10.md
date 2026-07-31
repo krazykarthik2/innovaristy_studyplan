@@ -1,3 +1,7 @@
+---
+notion-url: https://www.notion.so/3aec4db880d981809cb3e5a24d37bf31
+---
+
 # Day 10: TF2, Robot Frames & The Math of Kinematics
 
 ### 📌 TL;DR

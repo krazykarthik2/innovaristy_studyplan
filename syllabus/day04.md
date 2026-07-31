@@ -1,3 +1,7 @@
+---
+notion-url: https://www.notion.so/3aec4db880d9812e98e0c7abfc7b50d8
+---
+
 # Day 04: ROS2 Installation, DDS & Workspace Setup
 
 ### 📌 TL;DR
