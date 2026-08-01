@@ -4,7 +4,7 @@ title: architecture_and_project
 date: '2026-07-31 20:18:00.000'
 from_notion: https://app.notion.com/p/architecture_and_project-3aec4db880d981a4bc4be46e28b55ad1
 author: Karthik KRAZY
-last_edited_time: '2026-07-31 20:19:00.000'
+last_edited_time: '2026-08-01 05:34:00.000'
 ---
 # Expected Final Software Stack Architecture
 
@@ -62,7 +62,7 @@ graph TD
     A2 -->|Target Cart/Joint Poses| M1
     M1 -->|Collision-Free Path| M2
     M2 -->|Trajectory Waypoints| C1
-    C1 -->|"Target States (Effort/Vel)"| R1
+    C1 -->|Target States (Effort/Vel)| R1
     R1 -->|Low-Level Commands| H2
     H2 -->|Encoder Feedback| R3
     R3 -->|Joint States| D1
