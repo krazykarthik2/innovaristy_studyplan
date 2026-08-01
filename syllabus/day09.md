@@ -1,101 +1,146 @@
 ---
 notion-url: https://www.notion.so/3aec4db880d981f7bb79c5ddd88f896b
+title: day09
+date: '2026-07-31 20:19:00.000'
+from_notion: https://app.notion.com/p/day09-3aec4db880d981f7bb79c5ddd88f896b
+author: Karthik KRAZY
+last_edited_time: '2026-07-31 20:19:00.000'
 ---
-
 # Day 09: ROS2 Launch Systems & Multi-Node Coordination
 
 ### 📌 TL;DR
-Understand why we use launch files, how to write launch scripts in Python, isolate identical nodes using namespaces, and remap topic destinations dynamically at startup.
 
 ---
 
 ### 📖 The Core Topics
 
-* **Why Launch Files?**
-  * Starting nodes one-by-one in separate terminal windows is tedious.
-  * Launch files allow you to start multiple nodes, load configuration files, define namespaces, and set environment variables using a single command.
-  * Launch command: `ros2 launch <package_name> <launch_file_name>`.
-* **Writing Python Launch Files**
-  * ROS2 launch files are written in Python for dynamic configurability:
-    ```python
-    from launch import LaunchDescription
-    from launch_ros.actions import Node
+- **Why Launch Files?**
 
-    def generate_launch_description():
-        return LaunchDescription([
-            Node(
-                package='my_package',
-                executable='talker_node',
-                name='custom_talker',
-                output='screen'
-            ),
-            Node(
-                package='my_package',
-                executable='listener_node',
-                name='custom_listener',
-                output='screen'
-            )
-        ])
-    ```
-* **What are Namespaces? (Isolating Environments)**
-  * **Definition**: A namespace is a prefix added to the names of nodes, topics, services, and actions (e.g., prefixing `/camera/image_raw` with `/robot_1` to make it `/robot_1/camera/image_raw`).
-  * **Why use namespaces?**:
-    * **Avoid Name Collisions**: If you have two identical robot arms on one machine, running their driver nodes normally will cause them to publish to the exact same topics (e.g., `/joint_states`), corrupting the data.
-    * **Clean Scaling**: By assigning a unique namespace to each arm (e.g., `/left_arm` and `/right_arm`), you can run the identical node executable multiple times.
-  * **How Namespaces Affect ROS 2 Components**:
-    * Node `/talker` in namespace `/robot_1` becomes `/robot_1/talker`.
-    * Topic `/chatter` published by that node becomes `/robot_1/chatter`.
-  * **Applying Namespaces**:
-    1. **In Launch Files (Python)**:
-       ```python
-       Node(
-           package='my_package',
-           executable='talker_node',
-           namespace='robot_1' # Prepends '/robot_1' to node and its topics
-       )
-       ```
-    2. **Via CLI (`ros2 run`)**:
-       Use the `--ros-args -r __ns:=` parameter flag:
-       ```bash
-       ros2 run my_package talker_node --ros-args -r __ns:=/robot_1
-       ```
-* **Dynamic Topic Routing & Aliasing: Remapping**
-  * **Is Remapping same as Aliasing?**: Yes! In ROS 2, "Remapping" is the official term for creating a name alias. It redirects a node's default topic, service, or action names to a new alias name without editing the source code.
-  * **How to implement Aliasing/Remapping**:
-    1. **In Launch Files (Python)**:
-       Pass the `remappings` list to the `Node` action:
-       ```python
-       Node(
-           package='telemetry',
-           executable='publisher_node',
-           remappings=[('/old_chatter', '/new_telemetry_stream')] # Aliases '/old_chatter' to '/new_telemetry_stream'
-       )
-       ```
-    2. **Via CLI (`ros2 run`)**:
-       Use the `-r` flag followed by the mapping target:
-       ```bash
-       ros2 run telemetry publisher_node --ros-args -r /old_chatter:=/new_telemetry_stream
-       ```
-  * **Remapping Rules**:
-    * Global Remap (starts with `/`): Changes the name globally across all namespaces.
-    * Relative Remap (no leading `/`): Changes the name only within the node's specific namespace context.
-* **Loading Parameter files (YAML) in Launch**
-  * Pass parameter configurations directly to nodes at launch:
-    ```python
-    Node(
-        package='my_pkg',
-        executable='my_node',
-        parameters=[LaunchConfiguration('params_file')]
-    )
-    ```
+	- Starting nodes one-by-one in separate terminal windows is tedious.
+
+	- Launch files allow you to start multiple nodes, load configuration files, define namespaces, and set environment variables using a single command.
+
+	- Launch command: `ros2 launch <package_name> <launch_file_name>`.
+
+- **Writing Python Launch Files**
+
+	- ROS2 launch files are written in Python for dynamic configurability:
+
+		
+```python
+from launch import LaunchDescription
+from launch_ros.actions import Node
+
+def generate_launch_description():
+    return LaunchDescription([
+        Node(
+            package='my_package',
+            executable='talker_node',
+            name='custom_talker',
+            output='screen'
+        ),
+        Node(
+            package='my_package',
+            executable='listener_node',
+            name='custom_listener',
+            output='screen'
+        )
+    ])
+```
+
+- **What are Namespaces? (Isolating Environments)**
+
+	- **Definition**: A namespace is a prefix added to the names of nodes, topics, services, and actions (e.g., prefixing `/camera/image_raw` with `/robot_1` to make it `/robot_1/camera/image_raw`).
+
+	- **Why use namespaces?**:
+
+- **Avoid Name Collisions**: If you have two identical robot arms on one machine, running their driver nodes normally will cause them to publish to the exact same topics (e.g., `/joint_states`), corrupting the data.
+
+- **Clean Scaling**: By assigning a unique namespace to each arm (e.g., `/left_arm` and `/right_arm`), you can run the identical node executable multiple times.
+
+	- **How Namespaces Affect ROS 2 Components**:
+
+- Node `/talker` in namespace `/robot_1` becomes `/robot_1/talker`.
+
+- Topic `/chatter` published by that node becomes `/robot_1/chatter`.
+
+	- **Applying Namespaces**:
+
+1. **In Launch Files (Python)**:
+
+	
+```python
+Node(
+    package='my_package',
+    executable='talker_node',
+    namespace='robot_1' # Prepends '/robot_1' to node and its topics
+)
+```
+
+1. **Via CLI (**`**ros2 run**`**)**:
+Use the `-ros-args -r __ns:=` parameter flag:
+
+	
+```bash
+ros2 run my_package talker_node --ros-args -r __ns:=/robot_1
+```
+
+- **Dynamic Topic Routing & Aliasing: Remapping**
+
+	- **Is Remapping same as Aliasing?**: Yes! In ROS 2, “Remapping” is the official term for creating a name alias. It redirects a node’s default topic, service, or action names to a new alias name without editing the source code.
+
+	- **How to implement Aliasing/Remapping**:
+
+1. **In Launch Files (Python)**:
+Pass the `remappings` list to the `Node` action:
+
+	
+```python
+Node(
+    package='telemetry',
+    executable='publisher_node',
+    remappings=[('/old_chatter', '/new_telemetry_stream')] # Aliases '/old_chatter' to '/new_telemetry_stream'
+)
+```
+
+1. **Via CLI (**`**ros2 run**`**)**:
+Use the `r` flag followed by the mapping target:
+
+	
+```bash
+ros2 run telemetry publisher_node --ros-args -r /old_chatter:=/new_telemetry_stream
+```
+
+- **Remapping Rules**:
+
+- Global Remap (starts with `/`): Changes the name globally across all namespaces.
+
+- Relative Remap (no leading `/`): Changes the name only within the node’s specific namespace context.
+
+- **Loading Parameter files (YAML) in Launch**
+
+	- Pass parameter configurations directly to nodes at launch:
+
+		
+```python
+Node(
+package='my_pkg',
+executable='my_node',
+parameters=[LaunchConfiguration('params_file')]
+)
+```
 
 ---
 
 ### 🛠️ Hands-on Lab
-* Create a launch package containing a `system_launch.py` script.
-* Configure it to spawn three nodes simultaneously: two `Talker` nodes in separate namespaces (`/arm_left` and `/arm_right`) and one global `Listener` node mapping incoming values.
+
+- Create a launch package containing a `system_launch.py` script.
+
+- Configure it to spawn three nodes simultaneously: two `Talker` nodes in separate namespaces (`/arm_left` and `/arm_right`) and one global `Listener` node mapping incoming values.
 
 ---
 
 ### 📝 Assignment
-* **Task**: Develop a "One-Click Robot Startup" file (`robot_startup_launch.py`). This script must configure namespaces, map topic paths dynamically, load logging variables, read parameters from a local YAML file, and output confirmation alerts.
+
+- **Task**: Develop a “One-Click Robot Startup” file (`robot_startup_launch.py`). This script must configure namespaces, map topic paths dynamically, load logging variables, read parameters from a local YAML file, and output confirmation alerts.
+
