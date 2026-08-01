@@ -62,7 +62,7 @@ graph TD
     A2 -->|Target Cart/Joint Poses| M1
     M1 -->|Collision-Free Path| M2
     M2 -->|Trajectory Waypoints| C1
-    C1 -->|Target States (Effort/Vel)| R1
+    C1 -->|"Target States (Effort/Vel)"| R1
     R1 -->|Low-Level Commands| H2
     H2 -->|Encoder Feedback| R3
     R3 -->|Joint States| D1
