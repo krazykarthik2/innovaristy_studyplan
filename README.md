@@ -1,3 +1,4 @@
+![banner](banner.png)
 # ROS2 Robotics Research Internship: Complete 15-Day Book
 
 Welcome! This is a complete, step-by-step interactive syllabus and study guide for the **Innovarsity Robotics Research Internship (ROS2 Track)**. 
