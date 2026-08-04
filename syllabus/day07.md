@@ -176,5 +176,6 @@ ros2 run my_pkg my_node_exe --ros-args --params-file config.yaml
 
 ### 📝 Assignment
 
-- **Task**: Create a node `safety_monitor` with parameters for safety range limits and battery threshold values. Add a service interface `/reconfigure` allowing users to change these parameters via terminal calls. Dump the updated parameter state to a local file using `ros2 param dump`.
+- **Task**: Create a node `safety_monitor` with parameters for safety range limits and battery threshold values. Add a service interface `/reconfigure` allowing users to change these parameters via terminal calls. Dump the updated parameter state to a local file using `ros2 param dump` as well as take the latest dump and reuse it on next run.
+- Initially all params should come from the YAML file.
 
