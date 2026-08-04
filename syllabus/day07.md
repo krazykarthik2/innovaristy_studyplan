@@ -168,8 +168,8 @@ ros2 run my_pkg my_node_exe --ros-args --params-file config.yaml
 
 ### 🛠️ Hands-on Lab
 
-- Implement a Python service server node that changes a motor state parameter (e.g., “STOPPED”, “RUNNING”) when receiving a request.
-
+- Implement a Python service server node that changes speed and direction like stated above and it has to have limit 0 and max_speed parameter.
+- declare the max_speed parameter as well as load it from yaml file
 - Test calling this service server using CLI commands.
 
 ---
